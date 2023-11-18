@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'StayHub',
       debugShowCheckedModeBanner:false,
       theme: ThemeData(
-        primarySwatch: Colors.amber
+        primarySwatch: Colors.indigo
       ),
       home: const BienvenidaScreen(),
     );
@@ -32,30 +32,41 @@ class BienvenidaScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Bienvenidos a StayHub'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: Stack(
+          fit: StackFit.expand,
           children: <Widget>[
             Image.asset(
               'assets/stayhub.png',
-              height: 200,
-              width: 200,
+              fit: BoxFit.cover,
             ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const MyHomePage(),
-                  ),
-                );
-              },
-              child: const Text('Ingresar'),
+            Align(
+             alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MyHomePage(),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xff3c4c44), // Cambia el color del botón cuando se presiona
+                  minimumSize: Size(200, 50), // Cambia el tamaño mínimo del botón
+              ),
+              child: const Text('Ingresar',
+              style: TextStyle(
+                  fontSize: 30,
+                  color: Color(0xffe0bd6b), // Cambia el color del texto
+                ),
+              ),
+              ),
             ),
+          ),
           ],
         ),
-      ),
     );
   }
 }
@@ -69,7 +80,17 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('StayHub'),
       ),
-      body: Center(
+      body: Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+            Image.asset(
+              'assets/stayhub.png',
+              fit: BoxFit.cover,
+            ),
+        Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -105,9 +126,13 @@ class MyHomePage extends StatelessWidget {
                 );
               },
               child: const Text('Reservar'),
+            
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
