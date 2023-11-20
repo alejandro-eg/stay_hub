@@ -1,8 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:stay_hub/registrar_cliente.dart';
 import 'package:stay_hub/reservar_habitacion.dart';
 import 'package:stay_hub/consultar_reservas.dart';
-
 void main() {
   runApp(const MyApp());
 }
@@ -25,7 +26,6 @@ class MyApp extends StatelessWidget {
 
 class BienvenidaScreen extends StatelessWidget {
   const BienvenidaScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +40,7 @@ class BienvenidaScreen extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             Align(
-             alignment: Alignment.bottomCenter,
+             alignment: Alignment.bottomRight,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
@@ -54,9 +54,56 @@ class BienvenidaScreen extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Color(0xff3c4c44), // Cambia el color del botón cuando se presiona
-                  minimumSize: Size(200, 50), // Cambia el tamaño mínimo del botón
+                  minimumSize: Size(100, 25), // Cambia el tamaño mínimo del botón
               ),
               child: const Text('Ingresar',
+              style: TextStyle(
+                  fontSize: 30,
+                  color: Color(0xffe0bd6b), // Cambia el color del texto
+                ),
+              ),
+              ),
+            ),
+            ),
+            Align(
+            alignment: Alignment.bottomLeft,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ElevatedButton(
+                onPressed: () async {
+                  // Código para el botón "Salir"
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Confirmación'),
+                        content: const Text(
+                            '¿Está seguro de que desea salir de la app?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pop(); // Cerrar el cuadro de diálogo
+                            },
+                            child: const Text('Cancelar'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop(exit(0));
+                                   // Cerrar la app diálogo
+                            },
+                            child: const Text('Salir'),
+                          ),
+                          ],                  
+                          );
+                          }
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xff3c4c44), // Cambia el color del botón cuando se presiona
+                  minimumSize: Size(100, 25), // Cambia el tamaño mínimo del botón
+              ),
+              child: const Text('Salir',
               style: TextStyle(
                   fontSize: 30,
                   color: Color(0xffe0bd6b), // Cambia el color del texto
@@ -70,7 +117,6 @@ class BienvenidaScreen extends StatelessWidget {
     );
   }
 }
-
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
@@ -103,18 +149,16 @@ class MyHomePage extends StatelessWidget {
                   ),
                 );
               },
-              child: const Text('Registrate'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ConsultarReservas(),
-                  ),
-                );
-              },
-              child: const Text('Consultar Reservas'),
+              style: ElevatedButton.styleFrom(
+                  primary: Color(0xff3c4c44), // Cambia el color del botón cuando se presiona
+                  minimumSize: Size(100, 25), // Cambia el tamaño mínimo del botón
+              ),
+              child: const Text('Registráte',
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Color(0xffe0bd6b), // Cambia el color del texto
+                ),
+              ),
             ),
             ElevatedButton(
               onPressed: () {
@@ -125,9 +169,37 @@ class MyHomePage extends StatelessWidget {
                   ),
                 );
               },
-              child: const Text('Reservar'),
-            
+              style: ElevatedButton.styleFrom(
+                  primary: Color(0xff3c4c44), // Cambia el color del botón cuando se presiona
+                  minimumSize: Size(100, 25), // Cambia el tamaño mínimo del botón
+              ),
+              child: const Text('Reservar',
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Color(0xffe0bd6b), // Cambia el color del texto
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ConsultarReservas(),
                   ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                  primary: Color(0xff3c4c44), // Cambia el color del botón cuando se presiona
+                  minimumSize: Size(100, 25), // Cambia el tamaño mínimo del botón
+              ),
+              child: const Text('Consultar Reserva',
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Color(0xffe0bd6b), // Cambia el color del texto
+                ),
+              ),
+            ),
                 ],
               ),
             ),
