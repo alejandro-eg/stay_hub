@@ -20,9 +20,9 @@ class HomePage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Navegar a la pantalla de registro de mascotas
-                Navigator.pushNamed(context, '/registrar_mascota');
+                Navigator.pushNamed(context, '/registrar_cliente');
               },
-              child: const Text('Registrar Mascota'),
+              child: const Text('Registrar Cliente'),
             ),
             ElevatedButton(
               onPressed: () {
