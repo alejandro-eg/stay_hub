@@ -4,6 +4,7 @@ class SharedPreferencesManager {
   static Future<void> guardarRegistro(
     String nombreCliente,
     String apellidoCliente,
+    String emailCliente,
     String cedula,
     String fechaNacimiento,
     String nacionalidad,
@@ -11,7 +12,7 @@ class SharedPreferencesManager {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> registros = prefs.getStringList('registros') ?? [];
     String nuevoRegistro =
-        '$nombreCliente|$apellidoCliente|$cedula|$fechaNacimiento|$nacionalidad';
+        '$nombreCliente|$apellidoCliente|$emailCliente|$cedula|$fechaNacimiento|$nacionalidad';
     registros.add(nuevoRegistro);
     prefs.setStringList('registros', registros);
   }

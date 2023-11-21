@@ -8,6 +8,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Bienvenido'),
+        backgroundColor: Color(0xff3c4c44),
       ),
       body: Center(
         child: Column(
@@ -19,7 +20,7 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Navegar a la pantalla de registro de mascotas
+                // Navegar a la pantalla de registro de clientes
                 Navigator.pushNamed(context, '/registrar_cliente');
               },
               child: const Text('Registrar Cliente'),

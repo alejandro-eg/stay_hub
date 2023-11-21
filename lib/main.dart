@@ -30,6 +30,7 @@ class BienvenidaScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Bienvenidos a StayHub'),
+        backgroundColor: Color(0xff3c4c44),
       ),
       body: Stack(
         fit: StackFit.expand,
@@ -130,6 +131,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('StayHub'),
+        backgroundColor: Color(0xff3c4c44),
       ),
       body: Stack(
         fit: StackFit.expand,
@@ -208,10 +210,10 @@ class MyHomePage extends StatelessWidget {
                     ),
                     child: const Text(
                       'Consultar Reserva',
-                      style: TextStyle(
+                     style: TextStyle(
                         fontSize: 20,
                         color: Color(0xffe0bd6b), // Cambia el color del texto
-                      ),
+                      ), 
                     ),
                   ),
                 ],
