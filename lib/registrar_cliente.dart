@@ -210,16 +210,6 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
                                     _selectedNacionalidad!,
                                   );
                                   // Mostrar un mensaje de éxito
-                                  if(validateEmail==false){
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content:
-                                          Text('Ingrese nuevamente el Email.'),
-                                      duration: Duration(seconds: 3),
-                                    ),
-                                  );
-                                  }
-                                  else{
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                       content:
@@ -227,7 +217,6 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
                                       duration: Duration(seconds: 3),
                                     ),
                                   );
-                                  }
                                   // Restablecer los controladores después de registrar
                                   _nombreClienteController.clear();
                                   _apellidoClienteController.clear();
