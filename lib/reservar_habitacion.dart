@@ -132,9 +132,16 @@ class _reservar_habitacion_state extends State<reservar_habitacion> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Flexible(
-          child: Text('Fecha de la Reserva: ${_fechaSeleccionada.toLocal()}'),
+          child: Text('Fecha y Hora de la Reserva: ${_fechaSeleccionada.toLocal()}'),
         ),
-        
+        Flexible(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Fecha de Entrada : ${(_fechaSeleccionada)}'),
+            ],
+          ),
+        ),
         ElevatedButton(
           onPressed: () {
             _seleccionarFecha();
