@@ -6,7 +6,7 @@ class reservar_habitacion extends StatefulWidget {
   _reservar_habitacion_state createState() => _reservar_habitacion_state();
 }
 
-class _reservar_habitacion_state extends State<reservar_habitacion>{
+class _reservar_habitacion_state extends State<reservar_habitacion> {
   DateTime _fechaSeleccionada = DateTime.now();
   /*String? _selectedTipo;
   List<String> tipo = [
@@ -15,18 +15,22 @@ class _reservar_habitacion_state extends State<reservar_habitacion>{
     'Matrimonial'
   ];*/
   String? _selectedTipo;
-Map<String, String> tipo= {
-  'Simple': 'assets/simple.png',
-  'Doble': 'assets/doble.png',
-  'Matrimonial': 'assets/matrimonial.png',
-};
-
+  Map<String, String> tipo = {
+    'Simple': 'assets/simple.png',
+    'Doble': 'assets/doble.png',
+    'Matrimonial': 'assets/matrimonial.png',
+  };
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Reservar Habitación'),
+        backgroundColor: Color(0xff3c4c44),
+        titleTextStyle: TextStyle(
+          fontSize: 20,
+          color: Color(0xffe0bd6b), // Cambia el color del texto
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -47,7 +51,18 @@ Map<String, String> tipo= {
               onPressed: () {
                 _confirmarReserva();
               },
-              child: Text('Reservar'),
+              style: ElevatedButton.styleFrom(
+                primary: Color(
+                    0xff3c4c44), // Cambia el color del botón cuando se presiona
+                minimumSize: Size(100, 25), // Cambia el tamaño mínimo del botón
+              ),
+              child: Text(
+                'Reservar',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Color(0xffe0bd6b), // Cambia el color del texto
+                ),
+              ),
             ),
           ],
         ),
@@ -74,34 +89,37 @@ Map<String, String> tipo= {
 
   Widget _crearSelectorHabitacion() {
     return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      DropdownButton<String>(
-        hint: const Text('Seleccione el Tipo de Habitación'),
-        value: _selectedTipo,
-        onChanged: (String? value) {
-          setState(() {
-            _selectedTipo = value;
-          });
-        },
-        items: tipo.keys.map<DropdownMenuItem<String>>((String tipoKey) {
-          return DropdownMenuItem<String>(
-            value: tipoKey,
-            child: Text(tipoKey),
-          );
-        }).toList(),
-      ),
-      SizedBox(height: 20),
-      _selectedTipo != null
-          ? Image.asset(
-              tipo[_selectedTipo!]!,
-              height: 300,
-              width: 300,
-              fit: BoxFit.cover,
-            )
-          : Container(),
-    ],
-  );
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        DropdownButton<String>(
+          hint: const Text('Seleccione el Tipo de Habitación'),
+          style: TextStyle(fontSize: 20,
+          color:Color(0xff3c4c44), // Cambia el color del texto
+        ),
+          value: _selectedTipo,
+          onChanged: (String? value) {
+            setState(() {
+              _selectedTipo = value;
+            });
+          },
+          items: tipo.keys.map<DropdownMenuItem<String>>((String tipoKey) {
+            return DropdownMenuItem<String>(
+              value: tipoKey,
+              child: Text(tipoKey),
+            );
+          }).toList(),
+        ),
+        SizedBox(height: 20),
+        _selectedTipo != null
+            ? Image.asset(
+                tipo[_selectedTipo!]!,
+                height: 300,
+                width: 300,
+                fit: BoxFit.cover,
+              )
+            : Container(),
+      ],
+    );
   }
 
   Widget _crearSelectorReserva() {
@@ -116,67 +134,85 @@ Map<String, String> tipo= {
         Flexible(
           child: Text('Fecha de la Reserva: ${_fechaSeleccionada.toLocal()}'),
         ),
+        
         ElevatedButton(
           onPressed: () {
             _seleccionarFecha();
           },
-          child: Text('Seleccionar Fecha'),
+          style: ElevatedButton.styleFrom(
+            primary: Color(
+                0xff3c4c44), // Cambia el color del botón cuando se presiona
+            minimumSize: Size(100, 25), // Cambia el tamaño mínimo del botón
+          ),
+          child: Text(
+            'Seleccionar Fecha',
+            style: TextStyle(
+              fontSize: 20,
+              color: Color(0xffe0bd6b), // Cambia el color del texto
+            ),
+          ),
         ),
       ],
     );
   }
 
   Widget _crearSelectorHora() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Flexible(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Hora de la reserva: ${_formatHora(_fechaSeleccionada)}'),
-          ],
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Flexible(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Hora de la reserva: ${_formatHora(_fechaSeleccionada)}'),
+            ],
+          ),
         ),
-      ),
-      ElevatedButton(
-        onPressed: () {
-          _seleccionarHora();
-        },
-        child: Text('Seleccionar Hora'),
-      ),
-    ],
-  );
-}
-
-
+        ElevatedButton(
+          onPressed: () {
+            _seleccionarHora();
+          },
+          style: ElevatedButton.styleFrom(
+            primary: Color(
+                0xff3c4c44), // Cambia el color del botón cuando se presiona
+            minimumSize: Size(100, 25), // Cambia el tamaño mínimo del botón
+          ),
+          child: Text('Seleccionar Hora',
+          style: TextStyle(
+                        fontSize: 20,
+                        color: Color(0xffe0bd6b), // Cambia el color del texto
+          ),
+          ),
+        ),
+      ],
+    );
+  }
 
   String _formatHora(DateTime dateTime) {
-  // Formatear la hora según tus preferencias
-  return '${dateTime.hour}:${dateTime.minute.toString().padLeft(2, '0')}';
-}
+    // Formatear la hora según tus preferencias
+    return '${dateTime.hour}:${dateTime.minute.toString().padLeft(2, '0')}';
+  }
 
-void _seleccionarHora() async {
-  TimeOfDay? pickedTime = await showTimePicker(
-    context: context,
-    initialTime: TimeOfDay.now(),
-  );
-
-  if (pickedTime != null) {
-    DateTime selectedDateTime = DateTime(
-      _fechaSeleccionada.year,
-      _fechaSeleccionada.month,
-      _fechaSeleccionada.day,
-      pickedTime.hour,
-      pickedTime.minute,
+  void _seleccionarHora() async {
+    TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
     );
 
-    setState(() {
-      _fechaSeleccionada = selectedDateTime;
-    });
+    if (pickedTime != null) {
+      DateTime selectedDateTime = DateTime(
+        _fechaSeleccionada.year,
+        _fechaSeleccionada.month,
+        _fechaSeleccionada.day,
+        pickedTime.hour,
+        pickedTime.minute,
+      );
+
+      setState(() {
+        _fechaSeleccionada = selectedDateTime;
+      });
+    }
   }
-}
-
-
 
   void _seleccionarFecha() async {
     DateTime? pickedDate = await showDatePicker(
@@ -194,24 +230,24 @@ void _seleccionarHora() async {
   }
 
   void _confirmarReserva() {
-     // Muestra un diálogo de confirmación
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text('Reserva Confirmada'),
-        content: Text('¡Habitación reservada con éxito!'),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              // Puedes agregar más lógica aquí si es necesario
-              Navigator.of(context).pop();
-            },
-            child: Text('Aceptar'),
-          ),
-        ],
-      );
-    },
-  );
+    // Muestra un diálogo de confirmación
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Reserva Confirmada'),
+          content: Text('¡Habitación reservada con éxito!'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                // Puedes agregar más lógica aquí si es necesario
+                Navigator.of(context).pop();
+              },
+              child: Text('Aceptar'),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

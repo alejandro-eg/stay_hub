@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'StayHub',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.indigo),
       home: const BienvenidaScreen(),
     );
   }
@@ -31,6 +30,10 @@ class BienvenidaScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Bienvenidos a StayHub'),
         backgroundColor: Color(0xff3c4c44),
+        titleTextStyle: TextStyle(
+          fontSize: 20,
+          color: Color(0xffe0bd6b), // Cambia el color del texto
+        ),
       ),
       body: Stack(
         fit: StackFit.expand,
@@ -132,6 +135,10 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('StayHub'),
         backgroundColor: Color(0xff3c4c44),
+        titleTextStyle: TextStyle(
+          fontSize: 20,
+          color: Color(0xffe0bd6b), // Cambia el color del texto
+        ),
       ),
       body: Stack(
         fit: StackFit.expand,
@@ -210,10 +217,10 @@ class MyHomePage extends StatelessWidget {
                     ),
                     child: const Text(
                       'Consultar Reserva',
-                     style: TextStyle(
+                      style: TextStyle(
                         fontSize: 20,
-                        color: Color(0xffe0bd6b), // Cambia el color del text 
-                      ), 
+                        color: Color(0xffe0bd6b), // Cambia el color del texto
+                      ),
                     ),
                   ),
                 ],

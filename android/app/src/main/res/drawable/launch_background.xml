@@ -7,6 +7,6 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@mipmap/stayhub" />
+            android:src="@mipmap/stayhub"/>
     </item> -->
 </layer-list>

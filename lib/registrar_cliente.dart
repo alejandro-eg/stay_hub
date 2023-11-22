@@ -76,6 +76,10 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
       appBar: AppBar(
         title: const Text('Registrar Cliente'),
         backgroundColor: Color(0xff3c4c44),
+        titleTextStyle: TextStyle(
+          fontSize: 20,
+          color: Color(0xffe0bd6b), // Cambia el color del texto
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -154,7 +158,7 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
                     },
                   ),
                   ElevatedButton(
-                    onPressed: ()async {
+                    onPressed: () async {
                       // Código para el botón "Guardar"
                       showDialog(
                         context: context,
@@ -175,7 +179,7 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
                                 onPressed: () async {
                                   Navigator.of(context)
                                       .pop(); // Cerrar el cuadro de diálogo
-                                      validateEmail();
+                                  validateEmail();
                                   // Obtener los valores de los controladores
                                   String nombreCliente =
                                       _nombreClienteController.text;
@@ -223,7 +227,7 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
                                   _emailClienteController.clear();
                                   _cedulaController.clear();
                                   _fechaNacimientoController.clear();
-                                  _selectedNacionalidad=null;
+                                  _selectedNacionalidad = null;
                                 },
                                 child: const Text('Guardar'),
                               ),
