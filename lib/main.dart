@@ -212,7 +212,7 @@ class MyHomePage extends StatelessWidget {
                       'Consultar Reserva',
                      style: TextStyle(
                         fontSize: 20,
-                        color: Color(0xffe0bd6b), // Cambia el color del texto
+                        color: Color(0xffe0bd6b), // Cambia el color del text 
                       ), 
                     ),
                   ),
