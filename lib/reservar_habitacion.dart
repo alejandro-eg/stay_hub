@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:stay_hub/shared_preferences_manager.dart';
 
 class reservar_habitacion extends StatefulWidget {
   @override
@@ -8,12 +9,7 @@ class reservar_habitacion extends StatefulWidget {
 
 class _reservar_habitacion_state extends State<reservar_habitacion> {
   DateTime _fechaSeleccionada = DateTime.now();
-  /*String? _selectedTipo;
-  List<String> tipo = [
-    'Simple',
-    'Doble',
-    'Matrimonial'
-  ];*/
+  DateTime _fechaSeleccionada1 = DateTime.now();
   String? _selectedTipo;
   Map<String, String> tipo = {
     'Simple': 'assets/simple.png',
@@ -128,39 +124,66 @@ class _reservar_habitacion_state extends State<reservar_habitacion> {
   }
 
   Widget _crearSelectorFecha() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Flexible(
-          child: Text('Fecha y Hora de la Reserva: ${_fechaSeleccionada.toLocal()}'),
-        ),
-        Flexible(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Fecha de Entrada : ${(_fechaSeleccionada)}'),
-            ],
+    return Column(
+    children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+            child: Text('Fecha de Entrada : ${_formatFecha(_fechaSeleccionada)}'),
           ),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            _seleccionarFecha();
-          },
-          style: ElevatedButton.styleFrom(
-            primary: Color(
-                0xff3c4c44), // Cambia el color del botón cuando se presiona
-            minimumSize: Size(100, 25), // Cambia el tamaño mínimo del botón
-          ),
-          child: Text(
-            'Seleccionar Fecha',
-            style: TextStyle(
-              fontSize: 20,
-              color: Color(0xffe0bd6b), // Cambia el color del texto
+          ElevatedButton(
+            onPressed: () {
+              _seleccionarFecha();
+            },
+            style: ElevatedButton.styleFrom(
+              primary: Color(
+                  0xff3c4c44), // Cambia el color del botón cuando se presiona
+              minimumSize: Size(100, 25), // Cambia el tamaño mínimo del botón
+            ),
+            child: Text(
+              'Seleccionar Fecha',
+              style: TextStyle(
+                fontSize: 20,
+                color: Color(0xffe0bd6b), // Cambia el color del texto
+              ),
             ),
           ),
-        ),
-      ],
-    );
+        ],
+      ),
+      SizedBox(height: 20),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Fecha de Salida : ${_formatFecha1(_fechaSeleccionada1)}'),
+              ],
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              _seleccionarFecha1();
+            },
+            style: ElevatedButton.styleFrom(
+              primary: Color(
+                  0xff3c4c44), // Cambia el color del botón cuando se presiona
+              minimumSize: Size(100, 25), // Cambia el tamaño mínimo del botón
+            ),
+            child: Text(
+              'Seleccionar Fecha',
+              style: TextStyle(
+                fontSize: 20,
+                color: Color(0xffe0bd6b), // Cambia el color del texto
+              ),
+            ),
+          ),
+        ],
+      ),
+    ],
+  );
   }
 
   Widget _crearSelectorHora() {
@@ -195,6 +218,16 @@ class _reservar_habitacion_state extends State<reservar_habitacion> {
     );
   }
 
+  String _formatFecha(DateTime dateTime) {
+  // Formatear la fecha según tus preferencias
+  return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+  }
+
+  String _formatFecha1(DateTime dateTime) {
+  // Formatear la fecha según tus preferencias
+  return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+  }
+
   String _formatHora(DateTime dateTime) {
     // Formatear la hora según tus preferencias
     return '${dateTime.hour}:${dateTime.minute.toString().padLeft(2, '0')}';
@@ -211,8 +244,6 @@ class _reservar_habitacion_state extends State<reservar_habitacion> {
         _fechaSeleccionada.year,
         _fechaSeleccionada.month,
         _fechaSeleccionada.day,
-        pickedTime.hour,
-        pickedTime.minute,
       );
 
       setState(() {
@@ -223,38 +254,60 @@ class _reservar_habitacion_state extends State<reservar_habitacion> {
 
   void _seleccionarFecha() async {
     DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: _fechaSeleccionada,
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2101),
-    );
+    context: context,
+    initialDate: _fechaSeleccionada,
+    firstDate: DateTime.now(),
+    lastDate: DateTime(2101),
+  );
 
-    if (pickedDate != null && pickedDate != _fechaSeleccionada) {
-      setState(() {
-        _fechaSeleccionada = pickedDate;
-      });
-    }
+  if (pickedDate != null && pickedDate != _fechaSeleccionada) {
+    setState(() {
+      // Ajusta la fecha para eliminar la hora, minutos y segundos
+      _fechaSeleccionada = DateTime(pickedDate.year, pickedDate.month, pickedDate.day);
+    });
+  }  
   }
 
-  void _confirmarReserva() {
-    // Muestra un diálogo de confirmación
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Reserva Confirmada'),
-          content: Text('¡Habitación reservada con éxito!'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                // Puedes agregar más lógica aquí si es necesario
-                Navigator.of(context).pop();
-              },
-              child: Text('Aceptar'),
-            ),
-          ],
-        );
-      },
-    );
+  void _seleccionarFecha1() async {
+    DateTime? pickedDate = await showDatePicker(
+    context: context,
+    initialDate: _fechaSeleccionada1,
+    firstDate: DateTime.now(),
+    lastDate: DateTime(2101),
+  );
+
+  if (pickedDate != null && pickedDate != _fechaSeleccionada1) {
+    setState(() {
+      // Ajusta la fecha para eliminar la hora, minutos y segundos
+      _fechaSeleccionada1 = DateTime(pickedDate.year, pickedDate.month, pickedDate.day);
+    });
+  }
+  
+  }
+
+  void _confirmarReserva() async {
+    // Guarda la información de la reserva en SharedPreferences
+  String infoReserva = '$_selectedTipo|$_fechaSeleccionada|$_fechaSeleccionada1';
+  await SharedPreferencesManager.guardarReserva(infoReserva);
+
+  // Muestra un diálogo de confirmación
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Reserva Confirmada'),
+        content: Text('¡Habitación reservada con éxito!'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              // Puedes agregar más lógica aquí si es necesario
+              Navigator.of(context).pop();
+            },
+            child: Text('Aceptar'),
+          ),
+        ],
+      );
+    },
+  );
   }
 }

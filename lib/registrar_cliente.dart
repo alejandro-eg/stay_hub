@@ -21,46 +21,10 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
   final TextEditingController _fechaNacimientoController =
       TextEditingController();
   List<String> nacionalidad = [
-    'afgano',
-    'alemán',
-    'árabe',
-    'argentino',
-    'australiano',
-    'belga',
-    'boliviano',
-    'brasileño',
-    'canadiense',
-    'chileno',
-    'chino',
-    'colombiano',
-    'coreano',
-    'costarricense',
-    'cubano',
-    'danés',
-    'ecuatoriano',
-    'egipcio',
-    'salvadoreño',
-    'español',
-    'estadounidense',
-    'francés',
-    'griego',
-    'guatemalteco',
-    'haitiano',
-    '	holandés',
-    'hondureño',
-    'inglés',
-    'iraní',
-    'israelí',
-    'italiano',
-    'japonés',
-    'marroquí',
-    'mexicano',
-    'nicaragüense',
-    'paraguayo',
-    'peruano',
-    'portugués',
-    'Otra'
-  ];
+      'argentino', 'boliviano', 'brasileño', 'canadiense', 'chileno', 'colombiano', 'costarricense', 'ecuatoriano',
+      'español', 'estadounidense','inglés', 'mexicano', 'paraguayo', 'peruano', 'Otra'];
+
+
   void validateEmail() {
     final bool EsValido =
         EmailValidator.validate(_emailClienteController.text.trim());
@@ -211,7 +175,7 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
                                     emailCliente,
                                     cedula,
                                     fechaNacimiento,
-                                    _selectedNacionalidad!,
+                                    _selectedNacionalidad!,                                
                                   );
                                   // Mostrar un mensaje de éxito
                                   ScaffoldMessenger.of(context).showSnackBar(

@@ -1,6 +1,20 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesManager {
+  static const String _reservaKey = 'reserva';
+
+  // Guarda la información de la reserva en SharedPreferences
+  static Future<void> guardarReserva(String infoReserva) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(_reservaKey, infoReserva);
+  }
+
+  // Obtiene la información de la reserva almacenada en SharedPreferences
+  static Future<String?> obtenerReserva() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_reservaKey);
+  }
+
   static Future<void> guardarRegistro(
     String nombreCliente,
     String apellidoCliente,
