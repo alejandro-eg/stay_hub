@@ -37,8 +37,6 @@ class _reservar_habitacion_state extends State<reservar_habitacion> {
             SizedBox(height: 20),
             _crearSelectorHabitacion(),
             SizedBox(height: 20),
-            _crearSelectorReserva(),
-            SizedBox(height: 20),
             _crearSelectorFecha(),
             SizedBox(height: 20),
             _crearSelectorHora(),
@@ -118,11 +116,6 @@ class _reservar_habitacion_state extends State<reservar_habitacion> {
     );
   }
 
-  Widget _crearSelectorReserva() {
-    // Implementa la lógica para seleccionar el servicio aquí
-    return Container();
-  }
-
   Widget _crearSelectorFecha() {
     return Column(
     children: [
@@ -130,7 +123,7 @@ class _reservar_habitacion_state extends State<reservar_habitacion> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Flexible(
-            child: Text('Fecha de Entrada : ${_formatFecha(_fechaSeleccionada)}'),
+            child: Text('Fecha de Ingreso : ${_formatFecha(_fechaSeleccionada)}'),
           ),
           ElevatedButton(
             onPressed: () {
@@ -194,7 +187,7 @@ class _reservar_habitacion_state extends State<reservar_habitacion> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Hora de la reserva: ${_formatHora(_fechaSeleccionada)}'),
+              Text('Hora de Ingreso: ${_formatHora(_fechaSeleccionada)}'),
             ],
           ),
         ),

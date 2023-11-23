@@ -32,19 +32,22 @@ class _ConsultarReservasState extends State<ConsultarReservas> {
         .where((registro) => registro.contains('|$cedula|'))
         .toList();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Consultar Reserva'),
+        backgroundColor: Color(0xff3c4c44),
+        titleTextStyle: TextStyle(
+          fontSize: 20,
+          color: Color(0xffe0bd6b), // Cambia el color del texto
+        ),
       ),
       body: _registros.isEmpty
           ? Center(child: Text('No hay registros para mostrar.'))
           : _crearContenido(),
     );
   }
-
   Widget _crearContenido() {
     return SingleChildScrollView(
       child: Column(
@@ -85,7 +88,7 @@ class _ConsultarReservasState extends State<ConsultarReservas> {
     List<String> clientes= _filtrarRegistrosPorCedula(_cedulaBusqueda);
 
     return clientes.isEmpty
-        ? Center(child: Text('No hay registros para la cédula ingresada.'))
+        ? Center(child: Text('No hay reservas para la cédula ingresada.'))
         : Column(
             children: [
               _crearBotonesNavegacion(clientes.length),
@@ -105,7 +108,17 @@ class _ConsultarReservasState extends State<ConsultarReservas> {
                   (_indiceRegistro - 1).clamp(0, cantidadRegistros - 1);
             });
           },
-          child: Text('Anterior'),
+           style: ElevatedButton.styleFrom(
+              primary: Color(
+                  0xff3c4c44), // Cambia el color del botón cuando se presiona
+              minimumSize: Size(100, 25), // Cambia el tamaño mínimo del botón
+            ),
+          child: Text('Anterior',
+          style: TextStyle(
+                fontSize: 20,
+                color: Color(0xffe0bd6b), // Cambia el color del texto
+              ),
+              ),
         ),
         SizedBox(width: 20),
         ElevatedButton(
@@ -115,26 +128,35 @@ class _ConsultarReservasState extends State<ConsultarReservas> {
                   (_indiceRegistro + 1).clamp(0, cantidadRegistros - 1);
             });
           },
-          child: Text('Siguiente'),
+           style: ElevatedButton.styleFrom(
+              primary: Color(
+                  0xff3c4c44), // Cambia el color del botón cuando se presiona
+              minimumSize: Size(100, 25), // Cambia el tamaño mínimo del botón
+            ),
+          child: Text('Siguiente',
+          style: TextStyle(
+                fontSize: 20,
+                color: Color(0xffe0bd6b), // Cambia el color del texto
+              ),
+              ),
         ),
       ],
     );
   }
-
-  Widget _crearDetalleClientes(List<String> clientes) {
+Widget _crearDetalleClientes(List<String> clientes) {
     if (_indiceRegistro < clientes.length) {
       String registro = clientes[_indiceRegistro];
       List<String> datos = registro.split('|');
-
       String nombreCliente = datos[0];
       String apellidoCliente = datos[1];
       String emailCliente = datos[2];
       String cedula = datos[3];
       String fechaNacimiento = datos[4];
       String nacionalidad = datos[5];
-      DateTime fechaEntrada = datos.length > 6 ? DateTime.parse(datos[6]) : DateTime.now();
-      DateTime fechaSalida = datos.length > 7 ? DateTime.parse(datos[7]) : DateTime.now();
-
+      //String tipoHabitacion=datos[6];
+      DateTime fechaEntrada = datos.length > 7 ? DateTime.parse(datos[7]) : DateTime.now();
+      DateTime fechaSalida = datos.length > 8? DateTime.parse(datos[8]) : DateTime.now();
+      DateTime horaEntrada= datos.length > 9? DateTime.parse(datos[8]) : DateTime.now();
       Future<void> _consultarRegistros() async {
         List<String> registros = await SharedPreferencesManager.obtenerRegistros();
         setState(() {
@@ -142,9 +164,6 @@ class _ConsultarReservasState extends State<ConsultarReservas> {
           _indiceRegistro = 0;
           });
       }
-
-      
-
       return Card(
       margin: EdgeInsets.all(16.0),
       child: Padding(
@@ -158,7 +177,9 @@ class _ConsultarReservasState extends State<ConsultarReservas> {
             Text('Cédula: $cedula'),
             Text('Fecha Nacimiento: $fechaNacimiento'),
             Text('Nacionalidad: $nacionalidad'),
-            Text('Fecha de entrada: ${_formatFecha(fechaEntrada)}'),
+            //Text('Tipo de Habitacion Reservada: $tipoHabitacion'),
+            Text('Fecha de Ingreso: ${_formatFecha(fechaEntrada)}'),
+            Text('Hora de Ingreso: ${_formatHora(horaEntrada)}'),
             Text('Fecha de Salida: ${_formatFecha(fechaSalida)}'),
           ],
         ),
@@ -170,5 +191,9 @@ class _ConsultarReservasState extends State<ConsultarReservas> {
   }
     String _formatFecha(DateTime dateTime) {
     return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+  }
+    String _formatHora(DateTime dateTime) {
+    // Formatear la hora según tus preferencias
+    return '${dateTime.hour}:${dateTime.minute.toString().padLeft(2, '0')}';
   }
 }
