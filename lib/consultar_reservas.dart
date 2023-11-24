@@ -143,6 +143,7 @@ class _ConsultarReservasState extends State<ConsultarReservas> {
       ],
     );
   }
+  //Array de los datos
 Widget _crearDetalleClientes(List<String> clientes) {
     if (_indiceRegistro < clientes.length) {
       String registro = clientes[_indiceRegistro];
